@@ -2,7 +2,7 @@ package bot
 
 import bot.handler.Handler
 import bot.messages.Messages
-import bot.recources.Recources
+import bot.recources.Resources
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.objects.Update
 
@@ -12,7 +12,7 @@ class CurrencyBot : TelegramLongPollingBot() {
 
     companion object {
         private const val botName = "Currency Exchange"
-        private const val botTokenTelegram = Recources.botTokenTelegram
+        private val botTokenTelegram = Resources().getProperties("botTokenTelegram")
     }
 
     override fun getBotToken(): String = botTokenTelegram
@@ -23,17 +23,17 @@ class CurrencyBot : TelegramLongPollingBot() {
         update ?: return
         val chatId = update.message.chatId.toString()
         try {
-            val command = update.message.text.split(" ").toTypedArray()
             if (update.hasMessage() && update.message.hasText()) {
+                val command = update.message.text.split(" ")
                 when (command[0]) {
-                    "/help" -> { handler.help(chatId) }
-                    "/start" -> { handler.start(chatId) }
-                    "/list" -> {  handler.listCurrencies(chatId) }
-                    "/convert" -> { handler.convertCurrency(chatId, command[1].toDouble(), command[2], command[3])}
-                    "/setTime" -> { handler.setReminder(chatId, command[1] + " " + command[2])}
-                    "/printReminders" -> { handler.printReminders(chatId) }
-                    "/deleteReminder" -> { handler.deleteReminder(chatId, command[1].toInt()) }
-                    else -> { handler.notValidCommand(chatId) }
+                    "/help" ->  handler.help(chatId)
+                    "/start" ->  handler.start(chatId)
+                    "/list" -> handler.listCurrencies(chatId)
+                    "/convert" -> handler.convertCurrency(chatId, command[1].toDouble(), command[2], command[3])
+                    "/setTime" -> handler.setReminder(chatId, command[1] + " " + command[2])
+                    "/printReminders" -> handler.printReminders(chatId)
+                    "/deleteReminder" -> handler.deleteReminder(chatId, command[1].toInt())
+                    else -> handler.notValidCommand(chatId)
                 }
             }
         } catch (e: Exception) {

@@ -8,11 +8,12 @@ interface HandlerInterface {
 
     fun setReminder(chatId: String, time: String)
 
+
     fun deleteReminder(chatId: String, number: Int)
 
     fun printReminders(chatId: String)
 
-    fun convertCurrency(chatId: String, value: Double, cur1: String, cur2: String)
+    fun convertCurrency(chatId: String, value: Double, from: String, to: String)
 
     fun notValidCommand(chatId: String)
 

@@ -1,7 +1,7 @@
 package bot.currencyApi
 
 import bot.enums.Currency
-import bot.recources.Recources
+import bot.recources.Resources
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -41,6 +41,6 @@ class CurrencyAPIImpl(private val base: Currency = Currency.USD) : CurrencyAPI {
     }
 
     companion object {
-        private const val API_KEY = Recources.API_KEY
+        private val API_KEY = Resources().getProperties("API_KEY")
     }
 }
