@@ -8,7 +8,6 @@ interface HandlerInterface {
 
     fun setReminder(chatId: String, time: String)
 
-
     fun deleteReminder(chatId: String, number: Int)
 
     fun printReminders(chatId: String)
