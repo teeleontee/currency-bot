@@ -19,5 +19,4 @@ interface HandlerInterface {
     fun listCurrencies(chatId: String)
 
     fun sendMessage(chatId: String, text: String)
-
 }
